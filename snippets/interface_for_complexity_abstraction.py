@@ -1,23 +1,22 @@
 from abc import ABC, abstractmethod
-from datetime import datetime
 
 
 # Define an interface for slot services
 class SlotService(ABC):
     @abstractmethod
-    def check_availability(self, date_time):
+    def check_availability(self):
         pass
 
     @abstractmethod
-    def book_slot(self, date_time):
+    def book_slot(self):
         pass
 
 
 # Use it as a simple interface
-def book_any_available_slot(slot_service: SlotService, booking_time: datetime) -> None:
-    available = slot_service.check_availability(booking_time)
+def book_any_available_slot(slot_service: SlotService) -> None:
+    available = slot_service.check_availability()
     if available:
-        slot_service.book_slot(booking_time)
+        slot_service.book_slot()
 
 
-book_any_available_slot(ReallyComplexOrExternalSlotService(), datetime.now())
+book_any_available_slot(ReallyComplexSlotService())
